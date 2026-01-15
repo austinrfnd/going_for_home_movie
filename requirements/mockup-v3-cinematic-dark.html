@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Going for Home - A Documentary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /*
+     * STYLE V3: CINEMATIC DARK
+     * -------------------------
+     * Dark, dramatic, film-forward with strong contrast
+     * Inspired by: Film noir posters, HBO documentaries, prestige cinema
+     * Mood: Intense, dramatic, cinematic, weighty
+     */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark: #0A0A0A;
+      --bg-card: #141414;
+      --bg-elevated: #1C1C1C;
+      --text-primary: #FFFFFF;
+      --text-secondary: #9A9A9A;
+      --text-muted: #666666;
+      --accent: #E63946;
+      --accent-gold: #D4A574;
+      --border: #2A2A2A;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Work Sans', -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      background: var(--bg-dark);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text-primary);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--text-primary);
+      margin: 6px 0;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg-dark);
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.1em;
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(10,10,10,0.3) 0%,
+        rgba(10,10,10,0.6) 50%,
+        rgba(10,10,10,0.95) 100%
+      ),
+      radial-gradient(ellipse at center top, #1a1a2e 0%, var(--bg-dark) 70%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: 8rem;
+      letter-spacing: 0.02em;
+      line-height: 0.9;
+      margin-bottom: 32px;
+      text-shadow: 0 4px 60px rgba(0,0,0,0.5);
+    }
+
+    .hero-tagline {
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+
+    .hero-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 32px;
+      border: 1px solid var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .hero-play:hover {
+      background: var(--text-primary);
+      color: var(--bg-dark);
+      border-color: var(--text-primary);
+    }
+
+    .hero-play::before {
+      content: '▶';
+      font-size: 0.7rem;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--text-muted), transparent);
+      margin: 12px auto 0;
+    }
+
+    /* Section */
+    .section {
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: 3rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 40px;
+    }
+
+    /* Platforms */
+    .platforms {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .platforms a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      transition: all 0.3s;
+    }
+
+    .platforms a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Synopsis */
+    .synopsis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .synopsis p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--text-secondary);
+    }
+
+    /* Awards */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      margin-bottom: 64px;
+    }
+
+    .award-card {
+      background: var(--bg-card);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .award-year {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .award-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .award-detail {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .festival-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .festival-grid span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 16px;
+      background: var(--bg-card);
+      text-align: center;
+    }
+
+    /* Quotes */
+    .quotes-section {
+      background: var(--bg-card);
+    }
+
+    .quote {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .quote p {
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+
+    .quote cite {
+      font-size: 0.85rem;
+      font-style: normal;
+      color: var(--accent-gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Press */
+    .press-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px 48px;
+    }
+
+    .press-grid a {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+
+    .press-grid a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 140px 0 60px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: 5rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Screenings */
+    .screening-item {
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      gap: 40px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .screening-date {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .screening-venue {
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .screening-location {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .screening-link {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      background: var(--text-primary);
+      color: var(--bg-dark);
+      transition: all 0.3s;
+    }
+
+    .screening-link:hover {
+      background: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .past-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .past-grid p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      padding: 16px 20px;
+      background: var(--bg-card);
+    }
+
+    /* Host CTA */
+    .host-cta {
+      text-align: center;
+      padding: 80px 48px;
+      background: var(--bg-card);
+      margin: 80px 0;
+      border: 1px solid var(--border);
+    }
+
+    .host-cta h3 {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .host-cta p {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 40px;
+      background: var(--accent);
+      color: var(--text-primary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background: #ff4757;
+    }
+
+    /* Team */
+    .team-member {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      margin-bottom: 64px;
+      align-items: start;
+    }
+
+    .team-photo {
+      aspect-ratio: 1;
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .team-info h3 {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: 2rem;
+      margin-bottom: 4px;
+    }
+
+    .team-info .role {
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .team-info p {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .credits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--border);
+    }
+
+    .credit-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 24px;
+      background: var(--bg-card);
+      font-size: 0.9rem;
+    }
+
+    .credit-item span:first-child {
+      color: var(--text-muted);
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      margin-bottom: 64px;
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .contact-card label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .contact-card a {
+      font-size: 1rem;
+      color: var(--text-primary);
+      transition: color 0.3s;
+    }
+
+    .contact-card a:hover {
+      color: var(--accent);
+    }
+
+    /* Form */
+    .contact-form {
+      max-width: 500px;
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-group select {
+      cursor: pointer;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 56px;
+    }
+
+    .social-links a {
+      width: 50px;
+      height: 50px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 100px;
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      font-size: 0.8rem;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-copy {
+      color: var(--text-muted);
+    }
+
+    /* Page visibility */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+
+      .hero-title { font-size: 4rem; }
+      .hero-tagline { font-size: 1rem; }
+
+      .synopsis { grid-template-columns: 1fr; gap: 24px; }
+      .awards-grid { grid-template-columns: 1fr; }
+      .festival-grid { grid-template-columns: repeat(2, 1fr); }
+      .screening-item { grid-template-columns: 1fr; gap: 12px; }
+      .screening-link { justify-self: start; }
+      .past-grid { grid-template-columns: 1fr; }
+      .team-member { grid-template-columns: 1fr; }
+      .team-photo { max-width: 200px; }
+      .credits-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+
+      .page-header h1 { font-size: 3rem; }
+      .section-title { font-size: 2rem; }
+
+      .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Going for Home</a>
+      <ul class="nav-links">
+        <li><a href="#about" class="active" data-page="about">About</a></li>
+        <li><a href="#screenings" data-page="screenings">Screenings</a></li>
+        <li><a href="#team" data-page="team">Team</a></li>
+        <li><a href="#contact" data-page="contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+    <a href="#" onclick="showPage('about'); toggleMobileMenu();">About</a>
+    <a href="#" onclick="showPage('screenings'); toggleMobileMenu();">Screenings</a>
+    <a href="#" onclick="showPage('team'); toggleMobileMenu();">Team</a>
+    <a href="#" onclick="showPage('contact'); toggleMobileMenu();">Contact</a>
+  </div>
+
+  <!-- ABOUT PAGE -->
+  <div class="page-section active" id="about">
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">A Documentary Film</p>
+        <h1 class="hero-title">Going for<br>Home</h1>
+        <p class="hero-tagline">In the aftermath of the Altadena fires, a Little League community confronts loss and discovers what home truly means.</p>
+        <a href="#" class="hero-play">Watch Trailer</a>
+      </div>
+      <div class="hero-scroll">Scroll</div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="section-label">Now Streaming</p>
+        <div class="platforms">
+          <a href="#">Vimeo</a>
+          <a href="#">Criterion Channel</a>
+          <a href="#">PBS</a>
+        </div>
+
+        <div class="synopsis">
+          <p>When the Eaton Fire swept through Altadena in January 2025, it destroyed not just homes and schools, but the baseball fields where this community had gathered for generations. The fire took everything visible—but it couldn't take what was invisible.</p>
+          <p>Going for Home follows the Altadena Little League through their first season after the disaster. It's a story of loss, yes, but also of what remains when everything is stripped away: the bonds between neighbors, the rituals that give life meaning, and the stubborn human need to rebuild.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="section-label">Recognition</p>
+
+        <div class="awards-grid">
+          <div class="award-card">
+            <div class="award-year">2026</div>
+            <div class="award-name">Documentary Competition</div>
+            <div class="award-detail">Sundance Film Festival</div>
+          </div>
+          <div class="award-card">
+            <div class="award-year">2026</div>
+            <div class="award-name">Best Documentary</div>
+            <div class="award-detail">Tribeca Film Festival</div>
+          </div>
+          <div class="award-card">
+            <div class="award-year">2026</div>
+            <div class="award-name">Audience Award</div>
+            <div class="award-detail">AFI Docs</div>
+          </div>
+        </div>
+
+        <p class="section-label">Official Selections</p>
+        <div class="festival-grid">
+          <span>SXSW</span>
+          <span>Hot Docs</span>
+          <span>Full Frame</span>
+          <span>True/False</span>
+          <span>DOC NYC</span>
+          <span>Sheffield DocFest</span>
+          <span>LA Film Festival</span>
+          <span>IDFA</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section quotes-section">
+      <div class="container">
+        <div class="quote">
+          <p>"A devastating and deeply human portrait. Through baseball, the film examines what it means to lose everything—and what it means to begin again."</p>
+          <cite>Variety</cite>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="section-label">Press</p>
+        <div class="press-grid">
+          <a href="#">The New York Times</a>
+          <a href="#">The Guardian</a>
+          <a href="#">Variety</a>
+          <a href="#">Los Angeles Times</a>
+          <a href="#">IndieWire</a>
+          <a href="#">The Hollywood Reporter</a>
+          <a href="#">NPR</a>
+          <a href="#">ESPN</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SCREENINGS PAGE -->
+  <div class="page-section" id="screenings">
+    <div class="container">
+      <header class="page-header">
+        <h1>Screenings</h1>
+      </header>
+
+      <section class="section" style="padding-top: 0;">
+        <p class="section-label">Upcoming</p>
+        <div class="screening-item">
+          <div class="screening-date">Mar 15</div>
+          <div>
+            <div class="screening-venue">Laemmle Playhouse 7</div>
+            <div class="screening-location">Pasadena, California</div>
+          </div>
+          <a href="#" class="screening-link">Tickets</a>
+        </div>
+        <div class="screening-item">
+          <div class="screening-date">Mar 22</div>
+          <div>
+            <div class="screening-venue">IFC Center</div>
+            <div class="screening-location">New York, NY</div>
+          </div>
+          <a href="#" class="screening-link">Tickets</a>
+        </div>
+        <div class="screening-item">
+          <div class="screening-date">Apr 5</div>
+          <div>
+            <div class="screening-venue">Gene Siskel Film Center</div>
+            <div class="screening-location">Chicago, IL</div>
+          </div>
+          <a href="#" class="screening-link">Info</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-label">Past Screenings</p>
+        <div class="past-grid">
+          <p>Sundance Film Festival — Park City, UT</p>
+          <p>SXSW — Austin, TX</p>
+          <p>AFI Docs — Washington, DC</p>
+          <p>LA Film Festival — Los Angeles, CA</p>
+          <p>Hot Docs — Toronto, ON</p>
+          <p>True/False — Columbia, MO</p>
+        </div>
+      </section>
+
+      <div class="host-cta">
+        <h3>Host a Screening</h3>
+        <p>Bring the film to your school, organization, or community.</p>
+        <a href="#" class="btn" onclick="showPage('contact')">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM PAGE -->
+  <div class="page-section" id="team">
+    <div class="container">
+      <header class="page-header">
+        <h1>Team</h1>
+      </header>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="team-member">
+          <div class="team-photo">Photo</div>
+          <div class="team-info">
+            <h3>Director Name</h3>
+            <p class="role">Director / Producer</p>
+            <p>An award-winning documentary filmmaker whose work examines communities in transformation. When the Altadena fires broke out, they felt compelled to document not the destruction, but the quiet acts of resilience that followed—the way people showed up for each other when everything else was gone.</p>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <div class="team-photo">Photo</div>
+          <div class="team-info">
+            <h3>Producer Name</h3>
+            <p class="role">Producer</p>
+            <p>A veteran documentary producer with a focus on stories of community and resilience. Their work has premiered at major festivals worldwide and been acquired by leading distributors and streamers.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-label">Credits</p>
+        <div class="credits-grid">
+          <div class="credit-item"><span>Cinematography</span><span>DP Name</span></div>
+          <div class="credit-item"><span>Editor</span><span>Editor Name</span></div>
+          <div class="credit-item"><span>Original Score</span><span>Composer</span></div>
+          <div class="credit-item"><span>Sound Design</span><span>Sound Designer</span></div>
+          <div class="credit-item"><span>Executive Producer</span><span>EP Name</span></div>
+          <div class="credit-item"><span>Archival Producer</span><span>Archival Name</span></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div class="page-section" id="contact">
+    <div class="container">
+      <header class="page-header">
+        <h1>Contact</h1>
+      </header>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="contact-grid">
+          <div class="contact-card">
+            <label>Press</label>
+            <a href="mailto:press@goingforhome.film">press@goingforhome.film</a>
+          </div>
+          <div class="contact-card">
+            <label>Screenings</label>
+            <a href="mailto:screenings@goingforhome.film">screenings@goingforhome.film</a>
+          </div>
+          <div class="contact-card">
+            <label>General</label>
+            <a href="mailto:info@goingforhome.film">info@goingforhome.film</a>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="#">IG</a>
+          <a href="#">FB</a>
+          <a href="#">VM</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-logo">Going for Home</span>
+      <span class="footer-copy">&copy; 2025 All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.toggle('active', link.dataset.page === pageId);
+      });
+      window.scrollTo(0, 0);
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', e => { e.preventDefault(); showPage(link.dataset.page); });
+    });
+  </script>
+</body>
+</html>

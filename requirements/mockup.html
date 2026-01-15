@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentary Title - Official Website</title>
+  <style>
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #000;
+      background: #fff;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #2d5a27;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.6;
+    }
+
+    .nav-links a.active {
+      border-bottom: 2px solid #000;
+      padding-bottom: 2px;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #000;
+      transition: 0.3s;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 40px 0;
+    }
+
+    .hero-image {
+      display: block;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+
+    .hero-image:hover {
+      opacity: 0.9;
+    }
+
+    .hero-placeholder {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .hero-placeholder h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-placeholder p {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-bottom: 24px;
+    }
+
+    .hero-placeholder .play-btn {
+      width: 64px;
+      height: 64px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-placeholder .play-btn::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 20px solid #fff;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      margin-left: 4px;
+    }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 48px 0;
+    }
+
+    /* Section */
+    .section {
+      padding: 24px 0;
+    }
+
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    /* Platforms */
+    .platforms {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+      margin-bottom: 32px;
+    }
+
+    .platforms a {
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #000;
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+
+    .platforms a:hover {
+      opacity: 0.6;
+    }
+
+    /* Synopsis */
+    .synopsis p {
+      margin-bottom: 16px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* Awards */
+    .awards-major {
+      margin-bottom: 32px;
+    }
+
+    .award-item {
+      margin-bottom: 16px;
+    }
+
+    .award-item strong {
+      display: block;
+      font-size: 1rem;
+    }
+
+    .award-item span {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .festival-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    .festival-list span::after {
+      content: '|';
+      margin-left: 16px;
+      color: #ccc;
+    }
+
+    .festival-list span:last-child::after {
+      content: '';
+    }
+
+    /* Quotes */
+    .quote {
+      margin-bottom: 32px;
+      padding-left: 24px;
+      border-left: 3px solid #2d5a27;
+    }
+
+    .quote p {
+      font-size: 1.15rem;
+      font-style: italic;
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .quote cite {
+      font-size: 0.9rem;
+      color: #666;
+      font-style: normal;
+    }
+
+    /* Press */
+    .press-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+    }
+
+    .press-list a {
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: opacity 0.2s;
+    }
+
+    .press-list a:hover {
+      opacity: 0.6;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* Screenings */
+    .screening-item {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid #eee;
+      align-items: start;
+    }
+
+    .screening-date {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .screening-venue {
+      font-weight: 600;
+    }
+
+    .screening-location {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .screening-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border: 1px solid #000;
+      transition: all 0.2s;
+    }
+
+    .screening-link:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    .past-screenings {
+      columns: 2;
+      column-gap: 48px;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    .past-screenings p {
+      margin-bottom: 8px;
+      break-inside: avoid;
+    }
+
+    /* Host CTA */
+    .host-cta {
+      text-align: center;
+      padding: 48px;
+      background: #f8f8f8;
+      margin: 48px 0;
+    }
+
+    .host-cta p {
+      margin-bottom: 16px;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      background: #000;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover {
+      opacity: 0.8;
+    }
+
+    /* Team */
+    .team-member {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+      align-items: start;
+    }
+
+    .team-photo {
+      background: #e0e0e0;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.8rem;
+    }
+
+    .team-info h3 {
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+    }
+
+    .team-info .role {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .team-info p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .credits-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 48px;
+      font-size: 0.9rem;
+    }
+
+    .credits-list div {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+
+    .credits-list span:first-child {
+      color: #666;
+    }
+
+    /* Contact */
+    .contact-emails {
+      margin-bottom: 48px;
+    }
+
+    .contact-item {
+      margin-bottom: 24px;
+    }
+
+    .contact-item label {
+      display: block;
+      font-size: 0.8rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .contact-item a {
+      font-size: 1.1rem;
+      font-weight: 500;
+      border-bottom: 1px solid #000;
+      padding-bottom: 2px;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      max-width: 500px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #000;
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .social-links a {
+      width: 44px;
+      height: 44px;
+      border: 1px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .social-links a:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 80px;
+      padding: 32px 0;
+      border-top: 1px solid #eee;
+      text-align: center;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .footer-social a {
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-right: 16px;
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    /* Page Sections (hidden by default for demo) */
+    .page-section {
+      display: none;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .hero-placeholder h1 {
+        font-size: 1.75rem;
+      }
+
+      .screening-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .screening-link {
+        justify-self: start;
+        margin-top: 8px;
+      }
+
+      .past-screenings {
+        columns: 1;
+      }
+
+      .team-member {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .team-photo {
+        max-width: 150px;
+      }
+
+      .credits-list {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">DOCUMENTARY TITLE</a>
+      <ul class="nav-links">
+        <li><a href="#about" class="active" data-page="about">About</a></li>
+        <li><a href="#screenings" data-page="screenings">Screenings</a></li>
+        <li><a href="#team" data-page="team">Team</a></li>
+        <li><a href="#contact" data-page="contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+    <a href="#about" onclick="showPage('about'); toggleMobileMenu();">About</a>
+    <a href="#screenings" onclick="showPage('screenings'); toggleMobileMenu();">Screenings</a>
+    <a href="#team" onclick="showPage('team'); toggleMobileMenu();">Team</a>
+    <a href="#contact" onclick="showPage('contact'); toggleMobileMenu();">Contact</a>
+  </div>
+
+  <!-- ==================== ABOUT PAGE ==================== -->
+  <div class="page-section active" id="about">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <a href="#" class="hero-image" title="Watch Trailer">
+          <div class="hero-placeholder">
+            <h1>DOCUMENTARY TITLE</h1>
+            <p>A Film by Director Name</p>
+            <div class="play-btn"></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <div class="container">
+      <hr class="divider">
+
+      <!-- Platforms -->
+      <section class="section">
+        <div class="platforms">
+          <a href="#">Vimeo Staff Pick</a>
+          <a href="#">Short of the Week</a>
+          <a href="#">Criterion Channel</a>
+        </div>
+
+        <!-- Synopsis -->
+        <div class="synopsis">
+          <p>
+            A powerful documentary that explores the untold stories of resilience and hope.
+            Through intimate interviews and stunning archival footage, this film takes viewers
+            on an emotional journey through one of history's most significant moments.
+          </p>
+          <p>
+            Following the lives of those who lived through extraordinary circumstances, the
+            documentary weaves together personal narratives with broader historical context,
+            creating a tapestry of human experience that resonates across generations.
+          </p>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- Awards -->
+      <section class="section">
+        <h2 class="section-title">Awards & Recognition</h2>
+
+        <div class="awards-major">
+          <div class="award-item">
+            <strong>Shortlist, Academy Award for Best Documentary Short</strong>
+            <span>98th Academy Awards, 2026</span>
+          </div>
+          <div class="award-item">
+            <strong>Winner, Short Film Jury Prize: Nonfiction</strong>
+            <span>Sundance Film Festival, 2025</span>
+          </div>
+          <div class="award-item">
+            <strong>Grand Jury Prize, Best Documentary</strong>
+            <span>SXSW Film Festival, 2025</span>
+          </div>
+        </div>
+
+        <h2 class="section-title">Official Selections</h2>
+        <div class="festival-list">
+          <span>Tribeca Film Festival</span>
+          <span>Hot Docs</span>
+          <span>Sheffield DocFest</span>
+          <span>IDFA</span>
+          <span>True/False</span>
+          <span>Full Frame</span>
+          <span>AFI Docs</span>
+          <span>DOC NYC</span>
+          <span>Telluride Film Festival</span>
+          <span>Toronto International Film Festival</span>
+          <span>BFI London Film Festival</span>
+          <span>CPH:DOX</span>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- Critical Acclaim -->
+      <section class="section">
+        <h2 class="section-title">Critical Acclaim</h2>
+
+        <div class="quote">
+          <p>"A rare, sensitive meditation on memory, loss, and the enduring power of home.
+             This film achieves what few documentaries dare to attempt."</p>
+          <cite>— Criterion Current</cite>
+        </div>
+
+        <div class="quote">
+          <p>"Visually stunning and emotionally devastating. A must-see documentary that
+             will stay with you long after the credits roll."</p>
+          <cite>— Film Comment</cite>
+        </div>
+
+        <div class="quote">
+          <p>"An extraordinary achievement in documentary filmmaking. Intimate, powerful,
+             and profoundly moving."</p>
+          <cite>— Variety</cite>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- Press -->
+      <section class="section">
+        <h2 class="section-title">Press Coverage</h2>
+        <div class="press-list">
+          <a href="#">The New York Times</a>
+          <a href="#">The Guardian</a>
+          <a href="#">Variety</a>
+          <a href="#">The Hollywood Reporter</a>
+          <a href="#">IndieWire</a>
+          <a href="#">Film Comment</a>
+          <a href="#">The Verge</a>
+          <a href="#">NPR</a>
+          <a href="#">Los Angeles Times</a>
+          <a href="#">Sight & Sound</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ==================== SCREENINGS PAGE ==================== -->
+  <div class="page-section" id="screenings">
+    <div class="container">
+      <header class="page-header">
+        <h1>Screenings</h1>
+      </header>
+
+      <hr class="divider">
+
+      <section class="section">
+        <h2 class="section-title">Upcoming Screenings</h2>
+
+        <div class="screening-item">
+          <div class="screening-date">Jan 15, 2025</div>
+          <div>
+            <div class="screening-venue">Museum of the Moving Image</div>
+            <div class="screening-location">Queens, New York</div>
+          </div>
+          <a href="#" class="screening-link">Get Tickets</a>
+        </div>
+
+        <div class="screening-item">
+          <div class="screening-date">Feb 8, 2025</div>
+          <div>
+            <div class="screening-venue">IFC Center</div>
+            <div class="screening-location">New York, NY</div>
+          </div>
+          <a href="#" class="screening-link">More Info</a>
+        </div>
+
+        <div class="screening-item">
+          <div class="screening-date">Mar 22, 2025</div>
+          <div>
+            <div class="screening-venue">Laemmle Royal Theatre</div>
+            <div class="screening-location">Los Angeles, CA</div>
+          </div>
+          <a href="#" class="screening-link">Get Tickets</a>
+        </div>
+
+        <div class="screening-item">
+          <div class="screening-date">Apr 5, 2025</div>
+          <div>
+            <div class="screening-venue">Gene Siskel Film Center</div>
+            <div class="screening-location">Chicago, IL</div>
+          </div>
+          <a href="#" class="screening-link">More Info</a>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="section">
+        <h2 class="section-title">Past Screenings</h2>
+        <div class="past-screenings">
+          <p>Sundance Film Festival — Park City, UT — Jan 2025</p>
+          <p>SXSW — Austin, TX — Mar 2025</p>
+          <p>Tribeca Film Festival — New York, NY — Apr 2024</p>
+          <p>Hot Docs — Toronto, Canada — May 2024</p>
+          <p>Sheffield DocFest — Sheffield, UK — Jun 2024</p>
+          <p>AFI Docs — Washington, DC — Jun 2024</p>
+          <p>Melbourne International Film Festival — Australia — Aug 2024</p>
+          <p>Toronto International Film Festival — Toronto, Canada — Sep 2024</p>
+          <p>BFI London Film Festival — London, UK — Oct 2024</p>
+          <p>DOC NYC — New York, NY — Nov 2024</p>
+          <p>IDFA — Amsterdam, Netherlands — Nov 2024</p>
+          <p>CPH:DOX — Copenhagen, Denmark — Mar 2024</p>
+        </div>
+      </section>
+
+      <div class="host-cta">
+        <p>Interested in hosting a screening at your organization?</p>
+        <a href="#contact" class="btn" onclick="showPage('contact')">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TEAM PAGE ==================== -->
+  <div class="page-section" id="team">
+    <div class="container">
+      <header class="page-header">
+        <h1>Team</h1>
+      </header>
+
+      <hr class="divider">
+
+      <section class="section">
+        <div class="team-member">
+          <div class="team-photo">PHOTO</div>
+          <div class="team-info">
+            <h3>Director Name</h3>
+            <p class="role">Director / Producer</p>
+            <p>
+              An award-winning filmmaker whose work explores themes of identity, memory, and
+              belonging. Their previous films have screened at festivals worldwide and received
+              critical acclaim for their sensitive approach to documentary storytelling. This
+              project represents years of dedication and personal connection to the subject matter.
+            </p>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <div class="team-photo">PHOTO</div>
+          <div class="team-info">
+            <h3>Producer Name</h3>
+            <p class="role">Producer</p>
+            <p>
+              A veteran documentary producer with over two decades of experience. They have
+              worked on numerous award-winning projects, bringing important stories to audiences
+              around the world. Their expertise in navigating complex productions has been
+              instrumental in bringing this film to life.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="section">
+        <h2 class="section-title">Additional Credits</h2>
+        <div class="credits-list">
+          <div>
+            <span>Cinematography</span>
+            <span>Jane Smith</span>
+          </div>
+          <div>
+            <span>Editor</span>
+            <span>John Doe</span>
+          </div>
+          <div>
+            <span>Original Music</span>
+            <span>Composer Name</span>
+          </div>
+          <div>
+            <span>Sound Design</span>
+            <span>Audio Expert</span>
+          </div>
+          <div>
+            <span>Colorist</span>
+            <span>Color Artist</span>
+          </div>
+          <div>
+            <span>Archival Research</span>
+            <span>Research Team</span>
+          </div>
+          <div>
+            <span>Executive Producer</span>
+            <span>EP Name</span>
+          </div>
+          <div>
+            <span>Co-Producer</span>
+            <span>Co-Prod Name</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ==================== CONTACT PAGE ==================== -->
+  <div class="page-section" id="contact">
+    <div class="container">
+      <header class="page-header">
+        <h1>Contact</h1>
+      </header>
+
+      <hr class="divider">
+
+      <section class="section">
+        <div class="contact-emails">
+          <div class="contact-item">
+            <label>Press Inquiries</label>
+            <a href="mailto:press@documentary.com">press@documentary.com</a>
+          </div>
+          <div class="contact-item">
+            <label>Screening Requests</label>
+            <a href="mailto:screenings@documentary.com">screenings@documentary.com</a>
+          </div>
+          <div class="contact-item">
+            <label>General Inquiries</label>
+            <a href="mailto:info@documentary.com">info@documentary.com</a>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <h2 class="section-title">Send a Message</h2>
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject">
+              <option value="general">General Inquiry</option>
+              <option value="press">Press</option>
+              <option value="screenings">Screening Request</option>
+              <option value="educational">Educational Use</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+
+        <div class="social-links">
+          <a href="#" title="Instagram">IG</a>
+          <a href="#" title="Facebook">FB</a>
+          <a href="#" title="Twitter">X</a>
+          <a href="#" title="Vimeo">VM</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2024 Documentary Title. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple page navigation for demo
+    function showPage(pageId) {
+      // Hide all pages
+      document.querySelectorAll('.page-section').forEach(page => {
+        page.classList.remove('active');
+      });
+
+      // Show selected page
+      document.getElementById(pageId).classList.add('active');
+
+      // Update nav links
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.remove('active');
+        if (link.dataset.page === pageId) {
+          link.classList.add('active');
+        }
+      });
+
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    // Nav link click handlers
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage(link.dataset.page);
+      });
+    });
+  </script>
+
+</body>
+</html>

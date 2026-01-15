@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Going for Home - A Documentary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /*
+     * STYLE V2: WARM COMMUNITY
+     * -------------------------
+     * Earth tones, warm palette, emphasizing hope and resilience
+     * Inspired by: A24 films, community-focused documentaries
+     * Mood: Hopeful, grounded, human, warm despite the tragedy
+     */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --clay: #8B4513;
+      --terracotta: #C4724B;
+      --sand: #F5E6D3;
+      --cream: #FDF8F3;
+      --earth: #3D2914;
+      --sage: #6B7B5E;
+      --warm-gray: #6B635B;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--earth);
+      background: var(--cream);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .container-wide {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--cream);
+      z-index: 100;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .nav-logo {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--clay);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--warm-gray);
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--clay);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--earth);
+      margin: 5px 0;
+      border-radius: 1px;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.5rem;
+      color: var(--clay);
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--earth);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 40px;
+    }
+
+    .hero-image {
+      display: block;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(61, 41, 20, 0.15);
+    }
+
+    .hero-placeholder {
+      background: linear-gradient(145deg, #2C1810 0%, #4A2C1A 40%, #6B4423 100%);
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--sand);
+      text-align: center;
+      padding: 48px;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+
+    .hero-placeholder h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    .play-indicator {
+      margin-top: 40px;
+      width: 72px;
+      height: 72px;
+      border: 2px solid rgba(245, 230, 211, 0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .play-indicator::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 18px solid var(--sand);
+      border-top: 11px solid transparent;
+      border-bottom: 11px solid transparent;
+      margin-left: 4px;
+      opacity: 0.9;
+    }
+
+    .hero-image:hover .play-indicator {
+      background: rgba(245, 230, 211, 0.1);
+      border-color: rgba(245, 230, 211, 0.6);
+    }
+
+    /* Intro Block */
+    .intro-block {
+      background: var(--sand);
+      padding: 56px 0;
+      margin: 48px 0;
+      border-radius: 4px;
+    }
+
+    .intro-block .container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .intro-meta {
+      font-size: 0.85rem;
+      color: var(--warm-gray);
+    }
+
+    .intro-meta div {
+      margin-bottom: 16px;
+    }
+
+    .intro-meta span {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+      color: var(--sage);
+    }
+
+    /* Section */
+    .section {
+      padding: 48px 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .section-header::before {
+      content: '';
+      width: 32px;
+      height: 2px;
+      background: var(--terracotta);
+    }
+
+    .section-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--clay);
+    }
+
+    /* Platforms */
+    .platforms {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .platforms a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      background: var(--sand);
+      border-radius: 24px;
+      color: var(--clay);
+      transition: all 0.3s;
+    }
+
+    .platforms a:hover {
+      background: var(--clay);
+      color: var(--cream);
+    }
+
+    /* Synopsis */
+    .synopsis {
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+
+    .synopsis p {
+      margin-bottom: 24px;
+      font-size: 1.2rem;
+      line-height: 1.85;
+      color: var(--earth);
+    }
+
+    /* Awards */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .award-card {
+      background: var(--sand);
+      padding: 28px 24px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .award-card .icon {
+      width: 40px;
+      height: 40px;
+      background: var(--terracotta);
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream);
+      font-size: 1.2rem;
+    }
+
+    .award-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: var(--earth);
+    }
+
+    .award-detail {
+      font-size: 0.8rem;
+      color: var(--warm-gray);
+    }
+
+    .festival-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .festival-list span {
+      font-size: 0.85rem;
+      color: var(--warm-gray);
+      padding: 8px 16px;
+      border: 1px solid rgba(139, 69, 19, 0.2);
+      border-radius: 20px;
+    }
+
+    /* Quotes */
+    .quotes-section {
+      background: var(--sand);
+      padding: 64px 0;
+      margin: 48px 0;
+    }
+
+    .quote {
+      max-width: 700px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+
+    .quote:last-child {
+      margin-bottom: 0;
+    }
+
+    .quote p {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      color: var(--earth);
+    }
+
+    .quote cite {
+      font-size: 0.85rem;
+      font-style: normal;
+      color: var(--clay);
+      font-weight: 500;
+    }
+
+    /* Press */
+    .press-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 32px;
+    }
+
+    .press-list a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--warm-gray);
+      transition: color 0.3s;
+    }
+
+    .press-list a:hover {
+      color: var(--clay);
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 120px 0 40px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--clay);
+    }
+
+    /* Screenings */
+    .screening-item {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 32px;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(139, 69, 19, 0.15);
+      align-items: center;
+    }
+
+    .screening-date {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--clay);
+    }
+
+    .screening-venue {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .screening-location {
+      color: var(--warm-gray);
+      font-size: 0.9rem;
+    }
+
+    .screening-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 12px 24px;
+      background: var(--clay);
+      color: var(--cream);
+      border-radius: 24px;
+      transition: all 0.3s;
+    }
+
+    .screening-link:hover {
+      background: var(--earth);
+    }
+
+    .past-screenings {
+      columns: 2;
+      column-gap: 48px;
+      font-size: 0.9rem;
+      color: var(--warm-gray);
+    }
+
+    .past-screenings p {
+      margin-bottom: 12px;
+      break-inside: avoid;
+    }
+
+    /* Host CTA */
+    .host-cta {
+      text-align: center;
+      padding: 64px;
+      background: var(--sand);
+      border-radius: 12px;
+      margin: 56px 0;
+    }
+
+    .host-cta h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.75rem;
+      margin-bottom: 12px;
+      color: var(--clay);
+    }
+
+    .host-cta p {
+      color: var(--warm-gray);
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--clay);
+      color: var(--cream);
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 28px;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--earth);
+      transform: translateY(-2px);
+    }
+
+    /* Team */
+    .team-member {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 40px;
+      margin-bottom: 56px;
+      align-items: start;
+    }
+
+    .team-photo {
+      background: var(--sand);
+      aspect-ratio: 1;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--warm-gray);
+    }
+
+    .team-info h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--clay);
+    }
+
+    .team-info .role {
+      font-size: 0.85rem;
+      color: var(--terracotta);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .team-info p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--earth);
+    }
+
+    .credits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px 48px;
+    }
+
+    .credit-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+      font-size: 0.95rem;
+    }
+
+    .credit-item span:first-child {
+      color: var(--warm-gray);
+    }
+
+    .credit-item span:last-child {
+      font-weight: 500;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    .contact-card {
+      background: var(--sand);
+      padding: 32px 24px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .contact-card label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--sage);
+      margin-bottom: 12px;
+    }
+
+    .contact-card a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--clay);
+    }
+
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* Form */
+    .contact-form {
+      max-width: 500px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--earth);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(139, 69, 19, 0.2);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #fff;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--clay);
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 48px;
+    }
+
+    .social-links a {
+      width: 48px;
+      height: 48px;
+      background: var(--sand);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--clay);
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--clay);
+      color: var(--cream);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 80px;
+      padding: 40px 0;
+      background: var(--sand);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      font-size: 0.85rem;
+    }
+
+    .footer-logo {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 600;
+      color: var(--clay);
+    }
+
+    .footer-copy {
+      color: var(--warm-gray);
+    }
+
+    /* Page visibility */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+
+      .hero-placeholder h1 { font-size: 2.25rem; }
+
+      .intro-block .container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .awards-grid { grid-template-columns: 1fr; }
+      .screening-item { grid-template-columns: 1fr; gap: 12px; }
+      .screening-link { justify-self: start; }
+      .past-screenings { columns: 1; }
+      .team-member { grid-template-columns: 1fr; }
+      .team-photo { max-width: 180px; }
+      .credits-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+
+      .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Going for Home</a>
+      <ul class="nav-links">
+        <li><a href="#about" class="active" data-page="about">About</a></li>
+        <li><a href="#screenings" data-page="screenings">Screenings</a></li>
+        <li><a href="#team" data-page="team">Team</a></li>
+        <li><a href="#contact" data-page="contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="toggleMobileMenu()">&times;</button>
+    <a href="#" onclick="showPage('about'); toggleMobileMenu();">About</a>
+    <a href="#" onclick="showPage('screenings'); toggleMobileMenu();">Screenings</a>
+    <a href="#" onclick="showPage('team'); toggleMobileMenu();">Team</a>
+    <a href="#" onclick="showPage('contact'); toggleMobileMenu();">Contact</a>
+  </div>
+
+  <!-- ABOUT PAGE -->
+  <div class="page-section active" id="about">
+    <section class="hero">
+      <div class="container-wide">
+        <a href="#" class="hero-image" title="Watch Trailer">
+          <div class="hero-placeholder">
+            <p class="hero-eyebrow">A Documentary Film</p>
+            <h1>Going for Home</h1>
+            <p class="hero-tagline">In the aftermath of the Altadena fires, a Little League community discovers what it truly means to come home.</p>
+            <div class="play-indicator"></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <div class="intro-block">
+      <div class="container-wide">
+        <div class="intro-meta">
+          <div><span>Director</span>[Director Name]</div>
+          <div><span>Runtime</span>40 minutes</div>
+          <div><span>Year</span>2025</div>
+        </div>
+        <div class="platforms">
+          <a href="#">Watch on Vimeo</a>
+          <a href="#">Criterion Channel</a>
+          <a href="#">PBS</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <section class="section">
+        <div class="synopsis">
+          <p>When the Eaton Fire swept through Altadena in January 2025, it took homes, schools, and
+          the baseball fields where generations of families had gathered. But it couldn't take the
+          bonds that held this community together.</p>
+          <p>Going for Home follows the Altadena Little League through their first season after the
+          fires—a story of children learning resilience, parents finding strength in each other, and
+          a community discovering that home is something you carry with you.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Recognition</h2>
+        </div>
+
+        <div class="awards-grid">
+          <div class="award-card">
+            <div class="icon">★</div>
+            <div class="award-name">Documentary Competition</div>
+            <div class="award-detail">Sundance 2026</div>
+          </div>
+          <div class="award-card">
+            <div class="icon">★</div>
+            <div class="award-name">Best Documentary</div>
+            <div class="award-detail">Tribeca 2026</div>
+          </div>
+          <div class="award-card">
+            <div class="icon">★</div>
+            <div class="award-name">Audience Award</div>
+            <div class="award-detail">AFI Docs 2026</div>
+          </div>
+        </div>
+
+        <div class="festival-list">
+          <span>SXSW</span>
+          <span>Hot Docs</span>
+          <span>Full Frame</span>
+          <span>True/False</span>
+          <span>DOC NYC</span>
+          <span>Sheffield DocFest</span>
+          <span>LA Film Festival</span>
+        </div>
+      </section>
+    </div>
+
+    <div class="quotes-section">
+      <div class="container">
+        <div class="quote">
+          <p>"Through baseball, the film examines something far larger: how we rebuild not just
+          structures, but the invisible bonds that make a place home."</p>
+          <cite>— Variety</cite>
+        </div>
+        <div class="quote">
+          <p>"A deeply human portrait of community in crisis, finding hope in the most unexpected places."</p>
+          <cite>— Los Angeles Times</cite>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Press Coverage</h2>
+        </div>
+        <div class="press-list">
+          <a href="#">The New York Times</a>
+          <a href="#">The Guardian</a>
+          <a href="#">Variety</a>
+          <a href="#">Los Angeles Times</a>
+          <a href="#">IndieWire</a>
+          <a href="#">NPR</a>
+          <a href="#">ESPN</a>
+          <a href="#">The Atlantic</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- SCREENINGS PAGE -->
+  <div class="page-section" id="screenings">
+    <div class="container">
+      <header class="page-header">
+        <h1>Screenings</h1>
+      </header>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Upcoming</h2>
+        </div>
+        <div class="screening-item">
+          <div class="screening-date">Mar 15, 2026</div>
+          <div>
+            <div class="screening-venue">Laemmle Playhouse 7</div>
+            <div class="screening-location">Pasadena, California</div>
+          </div>
+          <a href="#" class="screening-link">Get Tickets</a>
+        </div>
+        <div class="screening-item">
+          <div class="screening-date">Mar 22, 2026</div>
+          <div>
+            <div class="screening-venue">IFC Center</div>
+            <div class="screening-location">New York, NY</div>
+          </div>
+          <a href="#" class="screening-link">Get Tickets</a>
+        </div>
+        <div class="screening-item">
+          <div class="screening-date">Apr 5, 2026</div>
+          <div>
+            <div class="screening-venue">Gene Siskel Film Center</div>
+            <div class="screening-location">Chicago, IL</div>
+          </div>
+          <a href="#" class="screening-link">More Info</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Past Screenings</h2>
+        </div>
+        <div class="past-screenings">
+          <p>Sundance Film Festival — Park City, UT</p>
+          <p>SXSW — Austin, TX</p>
+          <p>AFI Docs — Washington, DC</p>
+          <p>LA Film Festival — Los Angeles, CA</p>
+          <p>Hot Docs — Toronto, ON</p>
+          <p>True/False — Columbia, MO</p>
+        </div>
+      </section>
+
+      <div class="host-cta">
+        <h3>Bring the Film to Your Community</h3>
+        <p>Host a screening at your school, organization, or community center.</p>
+        <a href="#" class="btn" onclick="showPage('contact')">Request a Screening</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM PAGE -->
+  <div class="page-section" id="team">
+    <div class="container">
+      <header class="page-header">
+        <h1>The Team</h1>
+      </header>
+
+      <section class="section">
+        <div class="team-member">
+          <div class="team-photo">Photo</div>
+          <div class="team-info">
+            <h3>Director Name</h3>
+            <p class="role">Director & Producer</p>
+            <p>An award-winning documentary filmmaker with deep roots in community storytelling.
+            When the Altadena fires broke out, they felt compelled to document not the destruction,
+            but the response—the way people showed up for each other in moments of crisis.</p>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <div class="team-photo">Photo</div>
+          <div class="team-info">
+            <h3>Producer Name</h3>
+            <p class="role">Producer</p>
+            <p>A veteran documentary producer whose work focuses on stories of resilience and
+            community. Previous credits include award-winning films that have premiered at major
+            festivals worldwide.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Full Credits</h2>
+        </div>
+        <div class="credits-grid">
+          <div class="credit-item"><span>Cinematography</span><span>DP Name</span></div>
+          <div class="credit-item"><span>Editor</span><span>Editor Name</span></div>
+          <div class="credit-item"><span>Original Score</span><span>Composer</span></div>
+          <div class="credit-item"><span>Sound Design</span><span>Sound Designer</span></div>
+          <div class="credit-item"><span>Executive Producer</span><span>EP Name</span></div>
+          <div class="credit-item"><span>Archival Producer</span><span>Archival Name</span></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div class="page-section" id="contact">
+    <div class="container">
+      <header class="page-header">
+        <h1>Get in Touch</h1>
+      </header>
+
+      <section class="section">
+        <div class="contact-grid">
+          <div class="contact-card">
+            <label>Press</label>
+            <a href="mailto:press@goingforhome.film">press@goingforhome.film</a>
+          </div>
+          <div class="contact-card">
+            <label>Screenings</label>
+            <a href="mailto:screenings@goingforhome.film">screenings@goingforhome.film</a>
+          </div>
+          <div class="contact-card">
+            <label>General</label>
+            <a href="mailto:info@goingforhome.film">info@goingforhome.film</a>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="#" title="Instagram">IG</a>
+          <a href="#" title="Facebook">FB</a>
+          <a href="#" title="Vimeo">VM</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-logo">Going for Home</span>
+      <span class="footer-copy">&copy; 2025 All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.toggle('active', link.dataset.page === pageId);
+      });
+      window.scrollTo(0, 0);
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', e => { e.preventDefault(); showPage(link.dataset.page); });
+    });
+  </script>
+</body>
+</html>
