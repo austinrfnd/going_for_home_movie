@@ -204,10 +204,11 @@
     }
     .hero-bg {
       position: absolute;
-      inset: 0;
+      inset: -20%;
       background: 
         radial-gradient(ellipse 80% 50% at 50% 30%, rgba(201, 169, 98, 0.03) 0%, transparent 50%),
         radial-gradient(ellipse at center top, #12121a 0%, var(--bg-dark) 60%);
+      will-change: transform;
     }
     .hero-bg::before {
       content: '';
@@ -538,6 +539,51 @@
       margin-top: 6px;
       color: var(--accent-gold);
       font-weight: 400;
+    }
+
+    /* Parallax Section */
+    .parallax-section {
+      position: relative;
+      height: 50vh;
+      min-height: 400px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .parallax-bg {
+      position: absolute;
+      inset: -30%;
+      background-image: url('hero_image.png');
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+    }
+    .parallax-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        var(--bg-dark) 0%,
+        rgba(8,8,8,0.7) 30%,
+        rgba(8,8,8,0.7) 70%,
+        var(--bg-dark) 100%
+      );
+    }
+    .parallax-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 32px;
+    }
+    .parallax-quote {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-primary);
+      max-width: 800px;
+      line-height: 1.5;
     }
 
     /* Quotes */
@@ -1011,6 +1057,15 @@
       </div>
     </section>
 
+    <!-- Parallax Section -->
+    <section class="parallax-section" data-parallax="0.3">
+      <div class="parallax-bg" id="parallaxBg"></div>
+      <div class="parallax-overlay"></div>
+      <div class="parallax-content reveal">
+        <p class="parallax-quote">"Baseball functions not as metaphor imposed from outside, but as a lived experience through which the community processes grief, endurance, and hope."</p>
+      </div>
+    </section>
+
     <section class="section quotes-section">
       <div class="container">
         <div class="quote reveal">
@@ -1222,8 +1277,38 @@
       document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
     });
 
+    // Parallax effect
+    function initParallax() {
+      const heroBg = document.querySelector('.hero-bg');
+      const parallaxBg = document.getElementById('parallaxBg');
+      
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        
+        // Hero background parallax
+        if (heroBg) {
+          heroBg.style.transform = `translateY(${scrollY * 0.4}px)`;
+        }
+        
+        // Parallax section
+        if (parallaxBg) {
+          const section = parallaxBg.closest('.parallax-section');
+          const rect = section.getBoundingClientRect();
+          const sectionTop = rect.top + scrollY;
+          const relativeScroll = scrollY - sectionTop + window.innerHeight;
+          
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            parallaxBg.style.transform = `translateY(${relativeScroll * 0.2}px)`;
+          }
+        }
+      }, { passive: true });
+    }
+
     // Initialize
-    document.addEventListener('DOMContentLoaded', () => observeElements());
+    document.addEventListener('DOMContentLoaded', () => {
+      observeElements();
+      initParallax();
+    });
   </script>
 </body>
 </html>
