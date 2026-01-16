@@ -17,8 +17,9 @@ jobs:
         with:
           workload_identity_provider: projects/163190919110/locations/global/workloadIdentityPools/github-pool/providers/github-provider
           service_account: github-actions-deploy@going-for-home.iam.gserviceaccount.com
+          token_format: access_token
 
       - name: Deploy Preview to Firebase Hosting
         run: |
           npm install -g firebase-tools
-          firebase hosting:channel:deploy pr-${{ github.event.pull_request.number }} --project going-for-home
+          firebase hosting:channel:deploy pr-${{ github.event.pull_request.number }} --project going-for-home --token "${{ steps.auth.outputs.access_token }}"
