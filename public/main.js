@@ -37,6 +37,12 @@ function showPage(pageId) {
     link.classList.toggle('active', link.dataset.page === pageId);
   });
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Show/hide scroll indicator based on page
+  const heroScroll = document.querySelector('.hero-scroll');
+  if (heroScroll) {
+    heroScroll.style.display = pageId === 'about' ? '' : 'none';
+  }
   
   // Reset trailer when leaving about page
   if (pageId !== 'about') {
@@ -113,9 +119,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   
-  // Nav scroll effect
+  // Nav scroll effect and hide scroll indicator
+  const heroScroll = document.querySelector('.hero-scroll');
+
+  // Remove animation after it completes so we can control opacity via JS
+  if (heroScroll) {
+    heroScroll.addEventListener('animationend', () => {
+      heroScroll.style.animation = 'none';
+      heroScroll.style.opacity = '1';
+    });
+  }
+
   window.addEventListener('scroll', () => {
-    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+    const scrollY = window.scrollY;
+    document.getElementById('nav').classList.toggle('scrolled', scrollY > 50);
+
+    // Hide scroll indicator after scrolling down
+    if (heroScroll) {
+      const shouldHide = scrollY > 100;
+      heroScroll.style.opacity = shouldHide ? '0' : '1';
+      heroScroll.style.pointerEvents = shouldHide ? 'none' : 'auto';
+    }
   });
   
   // Initialize animations and parallax
