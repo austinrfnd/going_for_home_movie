@@ -1,0 +1,27 @@
+name: Deploy to Firebase Hosting on merge
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/163190919110/locations/global/workloadIdentityPools/github-pool/providers/github-provider
+          service_account: github-actions-deploy@going-for-home.iam.gserviceaccount.com
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ steps.auth.outputs.credentials_file_path }}
+          channelId: live
+          projectId: going-for-home

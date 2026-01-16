@@ -1,0 +1,25 @@
+name: Deploy to Firebase Hosting on PR
+on: pull_request
+
+jobs:
+  build_and_preview:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/163190919110/locations/global/workloadIdentityPools/github-pool/providers/github-provider
+          service_account: github-actions-deploy@going-for-home.iam.gserviceaccount.com
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ steps.auth.outputs.credentials_file_path }}
+          projectId: going-for-home
