@@ -551,7 +551,7 @@ a { color: inherit; text-decoration: none; }
 .parallax-bg {
   position: absolute;
   inset: -30%;
-  background-image: url('/assets/hero_image.png');
+  background-image: url('/assets/hero_image_old.png');
   background-size: cover;
   background-position: center;
   will-change: transform;
