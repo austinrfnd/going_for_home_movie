@@ -38,7 +38,8 @@
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js';
     import { getAnalytics, logEvent } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js';
-    
+    import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js';
+
     // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyDSFqcuGBvv67zKj5LBYpQzLRf_hEo0fsg",
@@ -49,13 +50,15 @@
       appId: "1:163190919110:web:ed0ce514b42239df206cc7",
       measurementId: "G-4VV21PZC47"
     };
-    
+
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-    
+    const db = getFirestore(app);
+
     // Expose for use in main.js
     window.firebaseAnalytics = { analytics, logEvent };
+    window.firebaseFirestore = { db, collection, addDoc, serverTimestamp };
   </script>
 </head>
 <body>
@@ -313,18 +316,52 @@
       </header>
 
       <section class="section" style="padding-top: 48px;">
-        <div class="contact-grid reveal">
-          <div class="contact-card">
-            <label>Press Inquiries</label>
-            <a href="mailto:simonsoneric@mac.com">simonsoneric@mac.com</a>
+        <div class="contact-form-wrapper reveal">
+          <p class="contact-intro">Have a question about the film, interested in hosting a screening, or press inquiry? We'd love to hear from you.</p>
+
+          <form id="contactForm" class="contact-form">
+            <div class="form-group">
+              <label for="contactName">Name <span class="required">*</span></label>
+              <input type="text" id="contactName" name="name" required autocomplete="name">
+            </div>
+
+            <div class="form-group">
+              <label for="contactEmail">Email <span class="required">*</span></label>
+              <input type="email" id="contactEmail" name="email" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+              <label for="inquiryType">Inquiry Type</label>
+              <select id="inquiryType" name="inquiryType">
+                <option value="general">General Inquiry</option>
+                <option value="press">Press Inquiry</option>
+                <option value="screenings">Screening Request</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage">Message <span class="required">*</span></label>
+              <textarea id="contactMessage" name="message" rows="5" required></textarea>
+            </div>
+
+            <!-- Honeypot spam field - hidden from users -->
+            <div class="form-group hp-field" aria-hidden="true">
+              <label for="website">Website</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button type="submit" class="btn contact-submit">
+              <span class="btn-text">Send Message</span>
+              <span class="btn-loading">Sending...</span>
+            </button>
+          </form>
+
+          <div id="formSuccess" class="form-message form-success" style="display: none;">
+            <p>Thank you for your message! We'll get back to you soon.</p>
           </div>
-          <div class="contact-card">
-            <label>Screening Requests</label>
-            <a href="mailto:simonsoneric@mac.com">simonsoneric@mac.com</a>
-          </div>
-          <div class="contact-card">
-            <label>General</label>
-            <a href="mailto:simonsoneric@mac.com">simonsoneric@mac.com</a>
+
+          <div id="formError" class="form-message form-error" style="display: none;">
+            <p>Something went wrong. Please try again or email us directly at simonsoneric@mac.com</p>
           </div>
         </div>
 

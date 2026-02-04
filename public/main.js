@@ -109,6 +109,75 @@ function initParallax() {
   }, { passive: true });
 }
 
+// Contact form submission
+async function handleContactSubmit(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const submitBtn = form.querySelector('.contact-submit');
+  const successMsg = document.getElementById('formSuccess');
+  const errorMsg = document.getElementById('formError');
+  const introText = document.querySelector('.contact-intro');
+
+  // Check honeypot field (spam protection)
+  const honeypot = form.querySelector('input[name="website"]');
+  if (honeypot && honeypot.value) {
+    // Bot detected, silently fail
+    if (introText) introText.style.display = 'none';
+    form.style.display = 'none';
+    successMsg.style.display = 'block';
+    return;
+  }
+
+  // Get form data
+  const name = form.querySelector('#contactName').value.trim();
+  const email = form.querySelector('#contactEmail').value.trim();
+  const inquiryType = form.querySelector('#inquiryType').value;
+  const message = form.querySelector('#contactMessage').value.trim();
+
+  // Basic validation
+  if (!name || !email || !message) {
+    return;
+  }
+
+  // Show loading state
+  submitBtn.classList.add('loading');
+  submitBtn.disabled = true;
+  successMsg.style.display = 'none';
+  errorMsg.style.display = 'none';
+
+  try {
+    // Submit to Firestore
+    if (window.firebaseFirestore) {
+      const { db, collection, addDoc, serverTimestamp } = window.firebaseFirestore;
+      await addDoc(collection(db, 'contact_submissions'), {
+        name,
+        email,
+        inquiryType,
+        message,
+        createdAt: serverTimestamp(),
+        read: false
+      });
+    }
+
+    // Log analytics event
+    logAnalyticsEvent('contact_form_submit', {
+      inquiry_type: inquiryType
+    });
+
+    // Show success - hide form and intro, show success message
+    if (introText) introText.style.display = 'none';
+    form.style.display = 'none';
+    successMsg.style.display = 'block';
+
+  } catch (error) {
+    console.error('Error submitting contact form:', error);
+    errorMsg.style.display = 'block';
+    submitBtn.classList.remove('loading');
+    submitBtn.disabled = false;
+  }
+}
+
 // Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
   // Set up nav link click handlers
@@ -145,7 +214,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize animations and parallax
   observeElements();
   initParallax();
-  
+
+  // Set up contact form handler
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', handleContactSubmit);
+  }
+
   // Log initial page view
   logAnalyticsEvent('page_view', {
     page_title: 'about',
