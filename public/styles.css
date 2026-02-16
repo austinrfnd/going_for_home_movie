@@ -600,6 +600,16 @@ a { color: inherit; text-decoration: none; }
   max-width: 800px;
   line-height: 1.5;
 }
+.parallax-cite {
+  display: block;
+  margin-top: 20px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.8rem;
+  font-style: normal;
+  color: var(--accent-gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
 
 /* Quotes */
 .quotes-section {
@@ -607,35 +617,52 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   overflow: hidden;
 }
-.quotes-section::before {
-  content: '"';
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 20rem;
-  position: absolute;
-  top: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--border);
-  pointer-events: none;
-  line-height: 1;
+.quotes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: stretch;
 }
-.quote {
-  max-width: 850px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 48px 0;
+.quote-card {
   position: relative;
+  padding: 48px 40px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: border-color 0.4s, transform 0.4s;
 }
-.quote p {
+.quote-card:hover {
+  border-color: var(--border-light);
+  transform: translateY(-2px);
+}
+.quote-card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--accent-gold), transparent);
+}
+.quote-card blockquote {
+  margin: 0;
+}
+.quote-card blockquote p {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 2rem;
   font-weight: 300;
   font-style: italic;
   line-height: 1.6;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   color: var(--text-primary);
 }
-.quote cite {
+.quote-card--featured blockquote p {
+  font-size: 2.2rem;
+}
+.quote-card:not(.quote-card--featured) blockquote p {
+  font-size: 1.5rem;
+}
+.quote-card cite {
   font-family: 'Work Sans', sans-serif;
   font-size: 0.8rem;
   font-style: normal;
@@ -1113,6 +1140,9 @@ a { color: inherit; text-decoration: none; }
   .host-cta { padding: 64px 32px; margin: 64px 0; }
   .host-cta h3 { font-size: 2.25rem; }
   .quote p { font-size: 1.5rem; }
+  .quotes-grid { grid-template-columns: 1fr; }
+  .quote-card--featured blockquote p { font-size: 1.8rem; }
+  .quote-card:not(.quote-card--featured) blockquote p { font-size: 1.3rem; }
   .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
   .synopsis-poster { max-width: 280px; }
   .synopsis-poster img { max-height: 50vh; width: auto; max-width: 100%; }
