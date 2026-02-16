@@ -203,7 +203,7 @@ filterBtns.forEach(btn => {
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const email = document.getElementById('email').value;
+  const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
 
   try {
