@@ -18,7 +18,7 @@ function playTrailer() {
   
   if (!heroMedia.classList.contains('playing')) {
     heroMedia.classList.add('playing');
-    // Update iframe src to autoplay
+    // Load and autoplay iframe only when user clicks play
     heroVideo.src = 'https://player.vimeo.com/video/1101026967?h=8b4859ef3f&title=0&byline=0&portrait=0&autoplay=1';
     
     // Log trailer play event
@@ -50,7 +50,7 @@ function showPage(pageId) {
     const heroVideo = document.getElementById('heroVideo');
     if (heroMedia && heroMedia.classList.contains('playing')) {
       heroMedia.classList.remove('playing');
-      heroVideo.src = 'https://player.vimeo.com/video/1101026967?h=8b4859ef3f&title=0&byline=0&portrait=0&autoplay=0';
+      heroVideo.removeAttribute('src');
     }
   }
   
@@ -214,6 +214,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize animations and parallax
   observeElements();
   initParallax();
+
+  // Keyboard support for play overlay
+  const playOverlay = document.querySelector('.hero-play-overlay');
+  if (playOverlay) {
+    playOverlay.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        playTrailer();
+      }
+    });
+  }
 
   // Set up contact form handler
   const contactForm = document.getElementById('contactForm');

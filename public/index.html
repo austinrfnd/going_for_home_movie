@@ -124,10 +124,10 @@
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu">&times;</button>
-    <a href="#" onclick="showPage('about'); toggleMobileMenu();">About</a>
-    <a href="#" onclick="showPage('screenings'); toggleMobileMenu();">Screenings</a>
-    <a href="#" onclick="showPage('team'); toggleMobileMenu();">Team</a>
-    <a href="#" onclick="showPage('contact'); toggleMobileMenu();">Contact</a>
+    <button class="mobile-menu-link" onclick="showPage('about'); toggleMobileMenu();">About</button>
+    <button class="mobile-menu-link" onclick="showPage('screenings'); toggleMobileMenu();">Screenings</button>
+    <button class="mobile-menu-link" onclick="showPage('team'); toggleMobileMenu();">Team</button>
+    <button class="mobile-menu-link" onclick="showPage('contact'); toggleMobileMenu();">Contact</button>
   </div>
 
 
@@ -149,13 +149,12 @@
               alt="Going for Home documentary - Altadena Little League players and community members on the baseball field after the Eaton Canyon fire"
               class="hero-poster"
             >
-            <div class="hero-play-overlay">
-              <div class="hero-play-btn"></div>
+            <div class="hero-play-overlay" role="button" aria-label="Play trailer" tabindex="0">
+              <div class="hero-play-btn" aria-hidden="true"></div>
             </div>
             <iframe 
               class="hero-video"
               id="heroVideo"
-              src="https://player.vimeo.com/video/1101026967?h=8b4859ef3f&title=0&byline=0&portrait=0&autoplay=0" 
               allow="autoplay; fullscreen; picture-in-picture" 
               allowfullscreen
               title="Going for Home - Official Trailer">
@@ -247,16 +246,6 @@
       <section class="section" style="padding-top: 48px;">
         <p class="section-label reveal">Upcoming</p>
         <div class="screening-item reveal">
-          <div class="screening-date">Feb 8 & 14, 2026</div>
-          <div>
-            <div class="screening-premiere">World Premiere</div>
-            <div class="screening-venue">Santa Barbara International Film Festival</div>
-            <div class="screening-location">Film Center, 916 State Street, Santa Barbara, Auditorium 4</div>
-            <div class="screening-times">Feb 8th at 3:00pm | Feb 14th at 6:00pm</div>
-          </div>
-          <a href="https://sbiff.org" target="_blank" class="screening-link">Info</a>
-        </div>
-        <div class="screening-item reveal">
           <div class="screening-date">Mar 4–14, 2026</div>
           <div>
             <div class="screening-venue">Hollywood Reel Film Festival</div>
@@ -272,6 +261,17 @@
             <div class="screening-times">Dates and times TBA</div>
           </div>
           <a href="#" class="screening-link">Info</a>
+        </div>
+
+        <p class="section-label reveal" style="margin-top: 80px;">Past Screenings</p>
+        <div class="screening-item screening-item--past reveal">
+          <div class="screening-date">Feb 8 & 14, 2026</div>
+          <div>
+            <div class="screening-premiere">World Premiere</div>
+            <div class="screening-venue">Santa Barbara International Film Festival</div>
+            <div class="screening-location">Film Center, 916 State Street, Santa Barbara, Auditorium 4</div>
+          </div>
+          <a href="https://sbiff.org" target="_blank" rel="noopener noreferrer" class="screening-link">Info</a>
         </div>
       </section>
 
@@ -293,7 +293,7 @@
       <section class="section" style="padding-top: 48px;">
         <div class="team-member reveal">
           <div class="team-photo">
-            <img src="/assets/headshots/eric_simonson.jpeg" alt="Eric Simonson headshot">
+            <img src="/assets/headshots/eric_simonson.jpeg" alt="Eric Simonson headshot" loading="lazy">
           </div>
           <div class="team-info">
             <h3>Eric Simonson</h3>
@@ -304,7 +304,7 @@
 
         <div class="team-member reveal">
           <div class="team-photo team-photo-zoomout">
-            <img src="/assets/headshots/sue_cremin.jpg" alt="Sue Cremin headshot">
+            <img src="/assets/headshots/sue_cremin.jpg" alt="Sue Cremin headshot" loading="lazy">
           </div>
           <div class="team-info">
             <h3>Sue Cremin</h3>
@@ -315,7 +315,7 @@
 
         <div class="team-member reveal">
           <div class="team-photo">
-            <img src="/assets/headshots/gordon_gano.jpeg" alt="Gordon Gano headshot">
+            <img src="/assets/headshots/gordon_gano.jpeg" alt="Gordon Gano headshot" loading="lazy">
           </div>
           <div class="team-info">
             <h3>Gordon Gano</h3>
@@ -326,7 +326,7 @@
 
         <div class="team-member reveal">
           <div class="team-photo">
-            <img src="/assets/headshots/mark_herzog.jpeg" alt="Mark Herzog headshot">
+            <img src="/assets/headshots/mark_herzog.jpeg" alt="Mark Herzog headshot" loading="lazy">
           </div>
           <div class="team-info">
             <h3>Mark Herzog</h3>
@@ -388,6 +388,7 @@
             <div class="form-group">
               <label for="inquiryType">Inquiry Type</label>
               <select id="inquiryType" name="inquiryType">
+                <option value="" disabled selected>Select an inquiry type</option>
                 <option value="general">General Inquiry</option>
                 <option value="press">Press Inquiry</option>
                 <option value="screenings">Screening Request</option>
