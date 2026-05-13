@@ -635,6 +635,13 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   overflow: hidden;
 }
+.press-feature-section::before {
+  display: none;
+}
+.press-feature-section .container {
+  position: relative;
+  z-index: 1;
+}
 .press-feature-card {
   position: relative;
   padding: 64px 56px;
@@ -644,12 +651,38 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
   gap: 32px;
   transition: border-color 0.4s;
+  overflow: hidden;
+}
+.press-feature-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/going_for_home_poster_3.png');
+  background-size: 65%;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 100% 100%, black 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 80% at 100% 100%, black 20%, transparent 75%);
+  opacity: 0.35;
+  z-index: 0;
+}
+.press-feature-card > * {
+  position: relative;
+  z-index: 1;
 }
 .press-feature-card:hover {
   border-color: var(--border-light);
 }
 .press-feature-card .quote-card-accent {
   width: 4px;
+}
+.press-outlet-logo {
+  height: 22px;
+  width: auto;
+  max-width: 180px;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.5;
 }
 .press-outlet {
   font-size: 0.7rem;
@@ -705,6 +738,11 @@ a { color: inherit; text-decoration: none; }
 }
 .press-feature-link:hover { color: var(--bg-dark); }
 .press-feature-link:hover::before { transform: scaleX(1); }
+
+.press-outlet-logo--pw {
+  height: 28px;
+  max-width: 220px;
+}
 
 @media (max-width: 768px) {
   .press-feature-card { padding: 40px 32px; }
