@@ -629,6 +629,88 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
 }
 
+/* Featured Press Callout */
+.press-feature-section {
+  background: var(--bg-card);
+  position: relative;
+  overflow: hidden;
+}
+.press-feature-card {
+  position: relative;
+  padding: 64px 56px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  transition: border-color 0.4s;
+}
+.press-feature-card:hover {
+  border-color: var(--border-light);
+}
+.press-feature-card .quote-card-accent {
+  width: 4px;
+}
+.press-outlet {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+.press-feature-quote {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text-primary);
+  max-width: 860px;
+}
+.press-feature-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.press-feature-meta {
+  font-family: 'Work Sans', -apple-system, sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+.press-feature-link {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s;
+  white-space: nowrap;
+}
+.press-feature-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: -1;
+}
+.press-feature-link:hover { color: var(--bg-dark); }
+.press-feature-link:hover::before { transform: scaleX(1); }
+
+@media (max-width: 768px) {
+  .press-feature-card { padding: 40px 32px; }
+  .press-feature-footer { flex-direction: column; align-items: flex-start; }
+}
+
 /* Quotes */
 .quotes-section {
   background: var(--bg-card);
